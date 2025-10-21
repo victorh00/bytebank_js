@@ -1,30 +1,55 @@
-import Cliente from './Cliente.js'
-import { ContaCorrente } from './ContaCorrente.js';
+import Cliente from "./Cliente.js";
+import Endereco from "./Endereco.js";
+import { ContaCorrente } from "./Conta/ContaCorrente.js";
+import { ContaPoupanca } from "./Conta/ContaPoupanca.js";
 
-const cliente1 = new Cliente('João', 123);
-const conta1 = new ContaCorrente(99, 9901, cliente1);
+console.log("\ngerando endereço...");
+const address = new Endereco("Líbero Badaró", 666, "São Paulo");
 
-const cliente2 = new Cliente('Maria', 456)
-const conta2 = new ContaCorrente(99, 9901, cliente2);
+console.log("gerando clientes...");
+const cliente1 = new Cliente("João", 111, address);
+const conta1 = new ContaCorrente(99, 9901, cliente1, 1000);
 
-const logs = new Array();
+const cliente2 = new Cliente("Maria", 222, address);
+const conta2 = new ContaPoupanca(99, 9901, cliente2, 2000);
 
-console.log('Cliente 1:')
+console.log("\ntestando operações por tipo de conta...");
+const logs1 = new Array();
+const logs2 = new Array();
+
+console.log("\nconta corrente...");
+console.log("Cliente 1:");
 cliente1.detalharCliente();
 
-console.log('\nCliente 2:');
-cliente2.detalharCliente();
-
-conta1.sacar(66);
-logs.push(`saque. novo saldo: ${conta1.getSaldo()}`);
+conta1.sacar(50);
+logs1.push(`\nsaque realizado. novo saldo: ${conta1.saldo}`);
 
 conta1.depositar(1000);
-logs.push(`depósito. novo saldo: ${conta1.getSaldo()}`);
+logs1.push(`depósito realizado. novo saldo: ${conta1.saldo}`);
 
 conta1.transferir(450, conta2);
-logs.push(`transferência. novo saldo ${conta1.getSaldo()}`);
+logs1.push(`transferência realizada. novo saldo ${conta1.saldo}`);
 
-console.log();
-for(let log of logs) {
-    console.log(log);
+for (let log of logs1) {
+  console.log(log);
 }
+
+console.log("\nconta poupança...");
+console.log("Cliente 2:");
+cliente2.detalharCliente();
+
+conta2.sacar(50);
+logs2.push(`\nsaque realizado. novo saldo: ${conta2.saldo}`);
+
+conta2.depositar(1000);
+logs2.push(`depósito realizado. novo saldo: ${conta2.saldo}`);
+
+conta2.transferir(450, conta1);
+logs2.push(`transferência realizada. novo saldo ${conta2.saldo}`);
+
+for (let log of logs2) {
+  console.log(log);
+}
+
+console.log("\ntestando super...");
+conta2.teste();
