@@ -12,6 +12,11 @@ export class Conta {
     this.cliente = cliente;
     this.#saldo = saldoInicial;
     Conta.numContas += 1;
+    if (this.constructor == Conta) {
+      console.log(
+        "Não instanciar Conta diretamente, prefira ContaCorrente ou ContaPoupanca"
+      );
+    }
   }
 
   get agencia() {
@@ -29,11 +34,15 @@ export class Conta {
 
   sacar(valor) {
     let taxa = 1;
+    this._sacar(valor, taxa);
+  }
+
+  _sacar(valor, taxa) {
     const valorSacado = valor * taxa;
     if (this.#saldo >= valorSacado) {
-      this.#saldo -= valorSacado;
-      return this.#saldo;
+      return (this.#saldo -= valorSacado);
     }
+    return 0;
   }
 
   depositar(valor) {

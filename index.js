@@ -2,6 +2,7 @@ import Cliente from "./Cliente.js";
 import Endereco from "./Endereco.js";
 import { ContaCorrente } from "./Conta/ContaCorrente.js";
 import { ContaPoupanca } from "./Conta/ContaPoupanca.js";
+import { Conta } from "./Conta/Conta.js";
 
 console.log("\ngerando endereço...");
 const address = new Endereco("Líbero Badaró", 666, "São Paulo");
@@ -53,3 +54,6 @@ for (let log of logs2) {
 
 console.log("\ntestando super...");
 conta2.teste();
+
+console.log("\nTestando condição do constructor...");
+const conta3 = new Conta(1, 1, cliente1, 1000);

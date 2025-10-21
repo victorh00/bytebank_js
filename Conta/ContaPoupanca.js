@@ -10,4 +10,8 @@ export class ContaPoupanca extends Conta {
     super.teste();
     console.log("Teste na classe ContaPoupanca");
   }
+  sacar(valor) {
+    let taxa = 1.25;
+    this._sacar(valor, taxa);
+  }
 }
