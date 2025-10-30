@@ -4,6 +4,7 @@ export default class Cliente {
   nome;
   #cpf;
   #endereco;
+  #senha;
 
   constructor(nome, cpf, endereco) {
     this.nome = nome;
@@ -35,5 +36,13 @@ export default class Cliente {
     console.log(`Nome: ${this.nome}`);
     console.log(`CPF: ${this.#cpf}`);
     this.endereco.detalharEndereco();
+  }
+
+  cadastrarSenha(senha) {
+    this.#senha = senha;
+  }
+
+  autenticar(senha) {
+    return this.#senha == senha;
   }
 }

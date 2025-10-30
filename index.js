@@ -61,7 +61,7 @@ conta2.teste();
 console.log("\nTestando condição do constructor...");
 const conta3 = new Conta(1, 1, cliente1, 1000);
 
-console.log("\ntestando funcionários");
+console.log("\ntestando autenticação funcionários");
 const diretor = new Diretor("joão", 10000, 100);
 const gerente = new Gerente("maria", 5000, 200);
 diretor.cadastrarSenha(123456);
@@ -69,13 +69,35 @@ gerente.cadastrarSenha(456789);
 
 const diretorLogado = SistemaAutenticacao.login(diretor, 123456);
 const gerenteLogado = SistemaAutenticacao.login(gerente, 111111);
+console.log("senha certa:");
 if (diretorLogado) {
   console.log(`funcionário ${diretor.nome} autenticado com sucesso.`);
 } else {
   console.log(`falha na autenticação do funcionário ${diretor.nome}`);
 }
+console.log("senha errada:");
 if (gerenteLogado) {
   console.log(`funcionário ${gerente.nome} autenticado com sucesso.`);
 } else {
   console.log(`falha na autenticação do funcionário ${gerente.nome}`);
+}
+
+console.log("\ntestando autenticação cliente");
+const enderecoCliente = new Endereco("líbero", 10, "sp");
+const cliente = new Cliente("pedro", 900, enderecoCliente);
+cliente.cadastrarSenha(123);
+let clienteLogado = SistemaAutenticacao.login(cliente, 123);
+if (clienteLogado) {
+  console.log(`cliente ${cliente.nome} autenticado com sucesso.`);
+} else {
+  console.log(`falha na autenticação do cliente ${cliente.nome}`);
+}
+console.log("trocando senha...");
+cliente.cadastrarSenha(999);
+console.log("senha errada:");
+clienteLogado = SistemaAutenticacao.login(cliente, 123);
+if (clienteLogado) {
+  console.log(`cliente ${cliente.nome} autenticado com sucesso.`);
+} else {
+  console.log(`falha na autenticação do cliente ${cliente.nome}`);
 }
