@@ -3,6 +3,9 @@ import Endereco from "./Endereco.js";
 import { ContaCorrente } from "./Conta/ContaCorrente.js";
 import { ContaPoupanca } from "./Conta/ContaPoupanca.js";
 import { Conta } from "./Conta/Conta.js";
+import Gerente from "./Funcionarios/Gerente.js";
+import Diretor from "./Funcionarios/Diretor.js";
+import { SistemaAutenticacao } from "./SistemaAutenticacao.js";
 
 console.log("\ngerando endereço...");
 const address = new Endereco("Líbero Badaró", 666, "São Paulo");
@@ -57,3 +60,22 @@ conta2.teste();
 
 console.log("\nTestando condição do constructor...");
 const conta3 = new Conta(1, 1, cliente1, 1000);
+
+console.log("\ntestando funcionários");
+const diretor = new Diretor("joão", 10000, 100);
+const gerente = new Gerente("maria", 5000, 200);
+diretor.cadastrarSenha(123456);
+gerente.cadastrarSenha(456789);
+
+const diretorLogado = SistemaAutenticacao.login(diretor, 123456);
+const gerenteLogado = SistemaAutenticacao.login(gerente, 111111);
+if (diretorLogado) {
+  console.log(`funcionário ${diretor.nome} autenticado com sucesso.`);
+} else {
+  console.log(`falha na autenticação do funcionário ${diretor.nome}`);
+}
+if (gerenteLogado) {
+  console.log(`funcionário ${gerente.nome} autenticado com sucesso.`);
+} else {
+  console.log(`falha na autenticação do funcionário ${gerente.nome}`);
+}
